@@ -14,7 +14,7 @@ public class FoucsAction : MonoBehaviour
 
     private void Update()
     {
-        // È­¸é Á¤Áß¾ÓÀÇ ·¹ÀÌ
+        // í™”ë©´ ì •ì¤‘ì•™ì˜ ë ˆì´
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
 
         _hitCount = Physics.RaycastNonAlloc(ray, _hits, interactiveDistance, entityLayer);

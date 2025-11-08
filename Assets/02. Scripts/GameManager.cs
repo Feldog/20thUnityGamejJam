@@ -5,7 +5,7 @@ using static Define;
 
 public class GameManager : Singleton<GameManager>
 {
-    // °ÔÀÓÀÇ Play»óÅÂ Pause »óÅÂ¸¦ °ü¸®
+    // ê²Œì„ì˜ Playìƒíƒœ Pause ìƒíƒœë¥¼ ê´€ë¦¬
     private EGameStae _gameState;
     public EGameStae GameState {  get { return _gameState; } }
 
@@ -16,14 +16,14 @@ public class GameManager : Singleton<GameManager>
     private int remainFloor = 5;
     private int remainEntity = 3;
 
-    // ½ÃÀÛ½Ã ½ÇÇàµÉ ¾×¼Ç
+    // ì‹œì‘ì‹œ ì‹¤í–‰ë  ì•¡ì…˜
     public event Action onStartGame;
 
     public event Action onPauseGame;
     public event Action onResumeGame;
 
 
-    // ½ÃÀÛ½Ã 
+    // ì‹œì‘ì‹œ 
     private bool firstStart = true;
 
     protected override void Awake()
@@ -57,21 +57,21 @@ public class GameManager : Singleton<GameManager>
     {
         UIManager.Instance.WaitFadeIn(1f, 2f);
 
-        // ¿ÜºÎ ÇÔ¼ö ½ÇÇà
+        // ì™¸ë¶€ í•¨ìˆ˜ ì‹¤í–‰
         onStartGame?.Invoke();
         
-        // Ã³À½ ½ºÅ¸Æ®½Ã ½ÇÇàµÇ´Â º¯°æ ÇÔ¼ö´Â ½ÇÇà
+        // ì²˜ìŒ ìŠ¤íƒ€íŠ¸ì‹œ ì‹¤í–‰ë˜ëŠ” ë³€ê²½ í•¨ìˆ˜ëŠ” ì‹¤í–‰
         GameStateChange(EGameStae.Play);
         player.Move(startPosition);
     }
 
-    // ÇöÀç °ÔÀÓÀÇ »óÅÂ¸¦ Á¶Àı
+    // í˜„ì¬ ê²Œì„ì˜ ìƒíƒœë¥¼ ì¡°ì ˆ
     public void GameStateChange(EGameStae changeState)
     {
-        // ´Ù¸¥ »óÅÂÀÏ °æ¿ì, Ã³À½ ½ÇÇàÇÏ´Â °æ¿ì ½ÇÇà
+        // ë‹¤ë¥¸ ìƒíƒœì¼ ê²½ìš°, ì²˜ìŒ ì‹¤í–‰í•˜ëŠ” ê²½ìš° ì‹¤í–‰
         if (_gameState != changeState || firstStart)
         {
-            // Ã³À½ ½ÇÇàµÇ´Â °æ¿ì ½ÇÇàÇÏÁö ¾ÊÀ½
+            // ì²˜ìŒ ì‹¤í–‰ë˜ëŠ” ê²½ìš° ì‹¤í–‰í•˜ì§€ ì•ŠìŒ
             if (!firstStart)
                 ExitState(_gameState);
 

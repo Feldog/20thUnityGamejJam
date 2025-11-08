@@ -1,4 +1,4 @@
-
+﻿
 using UnityEngine;
 
 public static class Define 
@@ -14,4 +14,5 @@ public static class Define
     public static readonly int maxSelected = 3;
 
     public enum EGameStae { Play, Pause, GameOver, GameClear, Intro}
+    public enum EAudioType { MASTER, SFX, BGM }
 }

@@ -12,7 +12,7 @@ public class EntityIsSelected : MonoBehaviour
 
     private EntityController _controller;
 
-    // ÃÊ±âÈ­
+    // ì´ˆê¸°í™”
     private void Awake()
     {
         _controller = GetComponent<EntityController>();
@@ -21,7 +21,7 @@ public class EntityIsSelected : MonoBehaviour
         originalMaterials.AddRange(_render.sharedMaterials);
     }
 
-    // ¿ÜºÎ¿¡¼­ Å¬¸¯½Ã ÀÌº¥Æ®
+    // ì™¸ë¶€ì—ì„œ í´ë¦­ì‹œ ì´ë²¤íŠ¸
     public void OnClickObject(Material _outline)
     {
         if (_selected)
@@ -34,7 +34,7 @@ public class EntityIsSelected : MonoBehaviour
         }
     }
 
-    // ¼±ÅÃµÊ
+    // ì„ íƒë¨
     public void Selected(Material _outline)
     {
         if (_selected)
@@ -42,19 +42,19 @@ public class EntityIsSelected : MonoBehaviour
 
         _selected = true;
 
-        // ¿ÜºÎ Å×µÎ¸® ¼³Á¤À» ÈÖÇÑ ¸¶Å×¸®¾ó Á¤·Ä
+        // ì™¸ë¶€ í…Œë‘ë¦¬ ì„¤ì •ì„ íœ˜í•œ ë§ˆí…Œë¦¬ì–¼ ì •ë ¬
         var materials = new List<Material>();
         materials.AddRange(originalMaterials);
         materials.Add(_outline);
         
-        // ¸¶Å×¸®¾ó ¼³Á¤
+        // ë§ˆí…Œë¦¬ì–¼ ì„¤ì •
         _render.materials = materials.ToArray();
 
-        // ¸Å´ÏÀú¿¡ ¼±ÅÃ °á°ú Àü¼Û
+        // ë§¤ë‹ˆì €ì— ì„ íƒ ê²°ê³¼ ì „ì†¡
         _controller.entityManager.SelectedEntity(this);
     }
 
-    // ¼±ÅÃ ÇØÁ¦
+    // ì„ íƒ í•´ì œ
     public void Unselected(bool notifyManager = true)
     {
         if (!_selected)
@@ -63,7 +63,7 @@ public class EntityIsSelected : MonoBehaviour
         _selected = false;
         _render.materials = originalMaterials.ToArray();
 
-        // ¸Å´ÏÀú¿¡ ¼±ÅÃ ÇØÁ¦ (¿äÃ»ÇÒ¶§¸¸)
+        // ë§¤ë‹ˆì €ì— ì„ íƒ í•´ì œ (ìš”ì²­í• ë•Œë§Œ)
         if(notifyManager)
             _controller.entityManager.UnselectedEntity(this);
     }

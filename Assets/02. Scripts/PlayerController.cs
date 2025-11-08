@@ -24,12 +24,12 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponent<Collider>();
         _playerInput = GetComponent<PlayerInput>();
 
-        // Ã³À½ ½ÃÀÛ ½Ã ÇÃ·¹ÀÌ¾î ÀÎÇ²À» ºñÈ°¼ºÈ­
+        // ì²˜ìŒ ì‹œìž‘ ì‹œ í”Œë ˆì´ì–´ ì¸í’‹ì„ ë¹„í™œì„±í™”
         _playerInput.enabled = false;
 
         var gameManager = GameManager.Instance;
 
-        // °ÔÀÓ¸Å´ÏÀú¿¡ ÀÌº¥Æ® µî·Ï
+        // ê²Œìž„ë§¤ë‹ˆì €ì— ì´ë²¤íŠ¸ ë“±ë¡
         gameManager.onStartGame += Init;
         gameManager.onPauseGame += () => _playerInput.enabled = false;
         gameManager.onResumeGame += () => _playerInput.enabled = true;

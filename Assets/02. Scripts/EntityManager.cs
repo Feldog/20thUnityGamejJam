@@ -11,18 +11,18 @@ public class EntityManager : MonoBehaviour
 
     public void Start()
     {
-        // ¸Å´ÏÀú¿¡°Ô ½ÃÀÛ½Ã ½ÇÇàµÉ ÇÔ¼ö Àü´Ş
+        // ë§¤ë‹ˆì €ì—ê²Œ ì‹œì‘ì‹œ ì‹¤í–‰ë  í•¨ìˆ˜ ì „ë‹¬
         GameManager.Instance.onStartGame += StartGame;
     }
 
-    // ·£´ı Entity¿¡°Ô ¼û°ÜÁø Ä³¸¯À¸·Î ºÎ¿©
+    // ëœë¤ Entityì—ê²Œ ìˆ¨ê²¨ì§„ ìºë¦­ìœ¼ë¡œ ë¶€ì—¬
     public void StartGame()
     {
         var randomEnemy = GetUniqueRandomsHashSet(0, entitys.Count, entityMax);
 
         for (int i = 0; i < entitys.Count; i++)
         {
-            // ÃÊ±âÈ­
+            // ì´ˆê¸°í™”
             entitys[i].Init();
 
             if (randomEnemy.Contains(i))
@@ -36,7 +36,7 @@ public class EntityManager : MonoBehaviour
         }
     }
 
-    // ·£´ı Unique Number
+    // ëœë¤ Unique Number
     public List<int> GetUniqueRandomsHashSet(int min, int max, int count)
     {
         if (Mathf.Abs(max - min) < count)
@@ -54,14 +54,14 @@ public class EntityManager : MonoBehaviour
         return uniqueNum.ToList();
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ »õ·Î ¼±ÅÃÀ» ÇÒ¶§
+    // í”Œë ˆì´ì–´ê°€ ìƒˆë¡œ ì„ íƒì„ í• ë•Œ
     public void SelectedEntity(EntityIsSelected entity)
     {
         selected.Add(entity);
 
         while(selected.Count > maxSelected)
         {
-            // ¿À·¡µÈ ¿£Æ¼Æ¼ »èÁ¦
+            // ì˜¤ë˜ëœ ì—”í‹°í‹° ì‚­ì œ
             var oldEntity = selected[0];
             
             selected.RemoveAt(0);
@@ -70,7 +70,7 @@ public class EntityManager : MonoBehaviour
         }
     }
     
-    // ÇÃ·¹ÀÌ¾î°¡ Á÷Á¢ ÇØÁ¦¸¦ ¿äÃ»ÇÒ¶§
+    // í”Œë ˆì´ì–´ê°€ ì§ì ‘ í•´ì œë¥¼ ìš”ì²­í• ë•Œ
     public void UnselectedEntity(EntityIsSelected entity)
     {
         if(selected.Contains(entity))

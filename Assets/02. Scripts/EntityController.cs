@@ -21,31 +21,31 @@ public class EntityController : MonoBehaviour
     {
         _isEntity = false;
 
-        // ·£´ı °ª
+        // ëœë¤ ê°’
         _poseIndex = Random.Range(0, PoseCount);
         _poseIndex %= PoseCount;
 
-        // Æ÷ÁîÀÇ ÀÎµ¦½º¸¦ º¯°æÈÄ ½ÇÇà
+        // í¬ì¦ˆì˜ ì¸ë±ìŠ¤ë¥¼ ë³€ê²½í›„ ì‹¤í–‰
         _anim.SetInteger(entityPoseIndexAnim, _poseIndex);
         _anim.SetTrigger(entitySetPoseAnim);
     }
 
     public void RandomPose()
     {
-        // Ã£¾Æ¾ßÇÏ´Â ´ë»óÀº ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ º¯ÇÏÁö ¾ÊÀ½
+        // ì°¾ì•„ì•¼í•˜ëŠ” ëŒ€ìƒì€ ì• ë‹ˆë©”ì´ì…˜ì´ ë³€í•˜ì§€ ì•ŠìŒ
         if (_isEntity)
             return;
 
-        // ÀÌÀü Æ÷Áî¶û °ãÄ¡Áö ¾Ê°Ô ·£´ıÇÑ Æ÷Â¡ ½ÇÇà
+        // ì´ì „ í¬ì¦ˆë‘ ê²¹ì¹˜ì§€ ì•Šê²Œ ëœë¤í•œ í¬ì§• ì‹¤í–‰
         _poseIndex += Random.Range(1, PoseCount - 1);
         _poseIndex %= PoseCount;
 
-        // Æ÷ÁîÀÇ ÀÎµ¦½º¸¦ º¯°æÈÄ ½ÇÇà
+        // í¬ì¦ˆì˜ ì¸ë±ìŠ¤ë¥¼ ë³€ê²½í›„ ì‹¤í–‰
         _anim.SetInteger(entityPoseIndexAnim, _poseIndex);
         _anim.SetTrigger(entitySetPoseAnim);
     }
 
-    // ¿£Æ¼Æ¼ ¼³Á¤
+    // ì—”í‹°í‹° ì„¤ì •
     public void SetEntity(bool isEntity)
     {
         _isEntity = isEntity;

@@ -11,7 +11,7 @@ public class FadeController : MonoBehaviour
 
     private bool _isFade = false;
 
-    // È­¸éÀÌ ¾ÏÀüµÇ¾ú´Ù°¡ ÄÑÁö´Â È¿°ú
+    // í™”ë©´ì´ ì•”ì „ë˜ì—ˆë‹¤ê°€ ì¼œì§€ëŠ” íš¨ê³¼
     public void FadeOutIn(float inDuration, float outDuration, float waitTime = 0f, Action action = null)
     {
         if (_isFade)
@@ -37,7 +37,7 @@ public class FadeController : MonoBehaviour
         });
     }
 
-    // È­¸éÀÌ ÄÑÁö´Â È¿°ú
+    // í™”ë©´ì´ ì¼œì§€ëŠ” íš¨ê³¼
     public void FadeIn(float duration, Action action = null)
     {
         if (_isFade)
@@ -54,7 +54,7 @@ public class FadeController : MonoBehaviour
         });
     }
 
-    // È­¸éÀÌ ²¨Áö´Â È¿°ú
+    // í™”ë©´ì´ êº¼ì§€ëŠ” íš¨ê³¼
     public void FadeOut(float duration, Action action = null)
     {
         if (_isFade)
@@ -81,7 +81,7 @@ public class FadeController : MonoBehaviour
         StartCoroutine(SetFade(duration, 1f, endOn, action));
     }
 
-    // ÆäÀÌµå °­Á¦ Á¾·á
+    // í˜ì´ë“œ ê°•ì œ ì¢…ë£Œ
     public void FadeOff()
     {
         _isFade = false;
@@ -97,14 +97,14 @@ public class FadeController : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
         
-        // ÆäÀÌµå Àç»ç¿ë °¡´É
+        // í˜ì´ë“œ ì¬ì‚¬ìš© ê°€ëŠ¥
         _isFade = false;
         
-        // »ç¿ëÀÌ ³¡³ª°í Á¾·á (¼±ÅÃ»çÇ×)
+        // ì‚¬ìš©ì´ ëë‚˜ê³  ì¢…ë£Œ (ì„ íƒì‚¬í•­)
         if(endOn)
             gameObject.SetActive(false);
 
-        // ¾×¼ÇÀÌ ÀÖÀ¸¸é ½ÇÇà
+        // ì•¡ì…˜ì´ ìˆìœ¼ë©´ ì‹¤í–‰
         action?.Invoke();
     }
 }
