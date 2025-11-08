@@ -1353,7 +1353,9 @@ GameObject:
   - component: {fileID: 2776276728672994152}
   - component: {fileID: 4276394977381158740}
   - component: {fileID: 436027241650860125}
-  m_Layer: 0
+  - component: {fileID: 1602091400272213771}
+  - component: {fileID: 5656089968706281659}
+  m_Layer: 6
   m_Name: Teddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,7 +1370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8133261621663903250}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7029032, z: -0, w: 0.7112856}
+  m_LocalRotation: {x: 0, y: 0.70290446, z: 0, w: 0.7112843}
   m_LocalPosition: {x: -6.07, y: 0.012, z: -3.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1389,10 +1391,10 @@ Animator:
   m_GameObject: {fileID: 8133261621663903250}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b7e10e6faa72e074888c402c5a76cf81, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3202bc3dd8a135044ab16eb14fcaf7a9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -1421,9 +1423,34 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.37123162
-  m_Height: 2.1094284
+  m_Height: 2.0226765
   m_Direction: 1
-  m_Center: {x: -0.00009390711, y: 0.9648547, z: 0.0069267456}
+  m_Center: {x: -0.00009390803, y: 1.0082303, z: 0.0069267447}
+--- !u!114 &1602091400272213771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133261621663903250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b52c0b85f5842624f98604904b6f0e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _render: {fileID: 211242323734624778}
+--- !u!114 &5656089968706281659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8133261621663903250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242ae8e5b0da8c84490ac5668da7f9f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8562684356721600916
 GameObject:
   m_ObjectHideFlags: 0
