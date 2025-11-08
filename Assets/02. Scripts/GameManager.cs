@@ -26,6 +26,9 @@ public class GameManager : Singleton<GameManager>
     // 시작시 
     private bool firstStart = true;
 
+    public AudioClip gameOverSound;
+    public AudioClip gameClearSound;
+
     protected override void Awake()
     {
         base.Awake();
@@ -111,6 +114,12 @@ public class GameManager : Singleton<GameManager>
         // 다른 상태일 경우, 처음 실행하는 경우 실행
         if (_gameState != changeState || firstStart)
         {
+            // 일시정지는 게임 중에만 가능
+            if(changeState == EGameStae.Pause && _gameState != EGameStae.Play)
+            {
+                return;
+            }
+
             // 처음 실행되는 경우 실행하지 않음
             if (!firstStart)
                 ExitState(_gameState);
@@ -162,10 +171,12 @@ public class GameManager : Singleton<GameManager>
             case EGameStae.GameOver:
                 Time.timeScale = 0f;
                 UIManager.Instance.SetGameOverUI();
+                SoundManager.Instance.OneShotSFX(gameOverSound);
                 break;
             case EGameStae.GameClear:
                 Time.timeScale = 0f;
                 UIManager.Instance.SetGameClearUI();
+                SoundManager.Instance.OneShotSFX(gameClearSound);
                 break;
             case EGameStae.Intro:
                 Time.timeScale = 1f;

@@ -109,4 +109,12 @@ public class SoundManager : Singleton<SoundManager>
     {
         SetAudioMute(EAudioType.MASTER);
     }
+
+    public void OneShotSFX(AudioClip audio)
+    {
+        if(audio != null && sfxSource != null)
+        {
+            sfxSource.PlayOneShot(audio);
+        }
+    }
 }

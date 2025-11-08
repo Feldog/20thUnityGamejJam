@@ -9,6 +9,8 @@ public class EntityManager : MonoBehaviour
 
     public List<EntityIsSelected> selected = new List<EntityIsSelected>();
 
+    public AudioClip[] entityKillSound;
+
     public void Start()
     {
         // 매니저에게 시작시 실행될 함수 전달
@@ -51,6 +53,11 @@ public class EntityManager : MonoBehaviour
                     count++;
                 }
             }
+            if (count > 0)
+            {
+                SoundManager.Instance.OneShotSFX(entityKillSound[Random.Range(0, entityKillSound.Length)]);
+            }
+
             return count;
         }
         else

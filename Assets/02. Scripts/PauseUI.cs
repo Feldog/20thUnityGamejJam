@@ -7,6 +7,8 @@ public class PauseUI : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
+    [SerializeField] private Button returnButton;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,5 +18,7 @@ public class PauseUI : MonoBehaviour
 
         bgmSlider.onValueChanged.AddListener((value) => soundManager.SetVolumeBGM(value));
         sfxSlider.onValueChanged.AddListener((value) => soundManager.SetVolumeSFX(value));
+
+        returnButton.onClick.AddListener(() => GameManager.Instance.GameStateChange(EGameStae.Play));
     }
 }

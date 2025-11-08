@@ -1,10 +1,12 @@
-﻿
+
 using UnityEngine;
 
 public static class Define 
 {
     public static readonly int entityPoseIndexAnim = Animator.StringToHash("poseIndex");
     public static readonly int entitySetPoseAnim = Animator.StringToHash("setPose");
+
+    public static readonly int openAnim = Animator.StringToHash("open");
 
     public static readonly int PoseCount = 5;
 
