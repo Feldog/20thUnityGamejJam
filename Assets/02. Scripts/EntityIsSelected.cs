@@ -67,4 +67,9 @@ public class EntityIsSelected : MonoBehaviour
         if(notifyManager)
             _controller.entityManager.UnselectedEntity(this);
     }
+
+    public bool isEntity()
+    {
+        return _controller._isEntity;
+    }
 }

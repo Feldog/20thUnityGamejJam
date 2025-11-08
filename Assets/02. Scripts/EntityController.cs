@@ -19,6 +19,8 @@ public class EntityController : MonoBehaviour
 
     public void Init()
     {
+        gameObject.SetActive(true);
+
         _isEntity = false;
 
         // 랜덤 값

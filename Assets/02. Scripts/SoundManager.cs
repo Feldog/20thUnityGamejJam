@@ -10,6 +10,8 @@ public class SoundManager : Singleton<SoundManager>
     public bool[] _mute = new bool[3] { false, false, false };
     public float[] _volume = new float[3] { 70f, 70f, 70f };
 
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource bgmSource;
 
     protected override void Awake()
     {
@@ -17,12 +19,14 @@ public class SoundManager : Singleton<SoundManager>
 
         if (audioMixer == null)
         {
-            audioMixer = Resources.Load<AudioMixer>("MainMixer");
+            audioMixer = Resources.Load<AudioMixer>("AudioMixer");
             if (audioMixer == null)
             {
                 Debug.Log("audioMixer를 찾을수 없습니다.");
             }
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
@@ -78,31 +82,6 @@ public class SoundManager : Singleton<SoundManager>
             _mute[type] = true;
             audioMixer.SetFloat(audioType.ToString(), -80f);
         }
-    }
-
-    public float GetVolume(EAudioType type)
-    {
-        int typeIndex = (int)type;
-        if (typeIndex < 0 || typeIndex >= _volume.Length) return 0f;
-
-        float logVolume = _volume[typeIndex];
-
-        if (logVolume <= -80f)
-        {
-            return 0f;
-        }
-
-        float sliderValue = Mathf.Pow(10f, logVolume / 20f) * 100f;
-
-        return sliderValue;
-    }
-
-    public bool IsMuted(EAudioType type)
-    {
-        int typeIndex = (int)type;
-        if (typeIndex < 0 || typeIndex >= _mute.Length) return false;
-
-        return _mute[typeIndex];
     }
 
     // 외부에서 참조해서 사용될 볼륨

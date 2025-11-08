@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static Define;
 
 public class GameManager : Singleton<GameManager>
@@ -21,7 +21,7 @@ public class GameManager : Singleton<GameManager>
 
     public event Action onPauseGame;
     public event Action onResumeGame;
-
+    public event Action onEndGame;
 
     // 시작시 
     private bool firstStart = true;
@@ -59,10 +59,50 @@ public class GameManager : Singleton<GameManager>
 
         // 외부 함수 실행
         onStartGame?.Invoke();
+
+        // 초기화
+        remainEntity = entityMax;
+        remainFloor = floorMax;
         
         // 처음 스타트시 실행되는 변경 함수는 실행
         GameStateChange(EGameStae.Play);
         player.Move(startPosition);
+    }
+
+    public void RestartCurrentScenes()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextFloor()
+    {
+        // 남은 층의 수를 갱신
+        remainFloor--;
+        if(remainFloor >= 0)
+        {
+            // 플레이어 위치 초기화
+            UIManager.Instance.SetFloorText(remainFloor);
+            UIManager.Instance.WaitFadeIn(1f, 1f);
+            player.Move(startPosition);
+        }
+        else
+        {
+            // 게임오버
+            GameStateChange(EGameStae.GameOver);
+        }
+    }
+
+    public bool CheckNextFloor(int findEntity)
+    {
+        // 남은 엔티티의 수 갱신
+        remainEntity -= findEntity;
+        UIManager.Instance.SetEntityText(remainEntity);
+
+        if(remainEntity > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     // 현재 게임의 상태를 조절
@@ -80,6 +120,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void GameClear()
+    {
+        GameStateChange(EGameStae.GameClear);
+    }
+
     private void ExitState(EGameStae gameState)
     {
         switch (gameState)
@@ -94,6 +139,8 @@ public class GameManager : Singleton<GameManager>
                 break;
             case EGameStae.GameClear:
                 break;
+            case EGameStae.Intro:
+                break;
         }
     }
 
@@ -103,6 +150,7 @@ public class GameManager : Singleton<GameManager>
         {
             case EGameStae.Play:
                 Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
                 UIManager.Instance.SetPlayUI();
                 break;
             case EGameStae.Pause:
@@ -112,10 +160,15 @@ public class GameManager : Singleton<GameManager>
                 UIManager.Instance.SetPauseUI();
                 break;
             case EGameStae.GameOver:
+                Time.timeScale = 0f;
+                UIManager.Instance.SetGameOverUI();
                 break;
             case EGameStae.GameClear:
+                Time.timeScale = 0f;
+                UIManager.Instance.SetGameClearUI();
                 break;
             case EGameStae.Intro:
+                Time.timeScale = 1f;
                 Cursor.lockState = CursorLockMode.None;
                 break;
         }

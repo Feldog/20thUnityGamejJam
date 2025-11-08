@@ -15,6 +15,50 @@ public class EntityManager : MonoBehaviour
         GameManager.Instance.onStartGame += StartGame;
     }
 
+    public void CheckNextFloor()
+    {
+        // 게임매니저에서 다음 플로어로 넘어갈수 있는지 판단
+        var gameManager = GameManager.Instance;
+        var result = gameManager.CheckNextFloor(CheckEntity());
+
+        // 셀렉트 정리
+        ClearEntity();
+        if (result)
+        {
+            NextFloor();
+            gameManager.NextFloor();
+        }
+    }
+
+    public void NextFloor()
+    {
+        for (int i = 0; i < entitys.Count; i++)
+        {
+            entitys[i].RandomPose();
+        }
+    }
+
+    public int CheckEntity()
+    {
+        if (selected != null && selected.Count >= 0)
+        {
+            int count = 0;
+            foreach (var value in selected)
+            {
+                if(value.isEntity())
+                {
+                    value.gameObject.SetActive(false);
+                    count++;
+                }
+            }
+            return count;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     // 랜덤 Entity에게 숨겨진 캐릭으로 부여
     public void StartGame()
     {
@@ -35,6 +79,7 @@ public class EntityManager : MonoBehaviour
             }
         }
     }
+
 
     // 랜덤 Unique Number
     public List<int> GetUniqueRandomsHashSet(int min, int max, int count)
@@ -65,9 +110,17 @@ public class EntityManager : MonoBehaviour
             var oldEntity = selected[0];
             
             selected.RemoveAt(0);
-
             oldEntity.Unselected(false);
         }
+    }
+
+    public void ClearEntity()
+    {
+        foreach(var entity in selected)
+        {
+            entity.Unselected(false);
+        }
+        selected.Clear();
     }
     
     // 플레이어가 직접 해제를 요청할때

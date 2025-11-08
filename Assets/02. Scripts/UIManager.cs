@@ -1,20 +1,21 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using static Define;
 
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject playCanvas;
     [SerializeField] private GameObject pauseCanvas;
+    [SerializeField] private GameObject GameClearCanvas;
+    [SerializeField] private GameObject GameOverCanvas;
     [SerializeField] private FadeController fadeCanvas;
 
     [SerializeField] private TextMeshProUGUI floorText;
     [SerializeField] private TextMeshProUGUI entityText;
 
-    public void Update()
-    {
-        
-    }
+
     public void SetPlayUI()
     {
         playCanvas.SetActive(true);
@@ -24,6 +25,16 @@ public class UIManager : Singleton<UIManager>
     public void SetPauseUI()
     {
         pauseCanvas.SetActive(true);
+    }
+
+    public void SetGameClearUI()
+    {
+        GameClearCanvas.SetActive(true);
+    }
+
+    public void SetGameOverUI()
+    {
+        GameOverCanvas.SetActive(true);
     }
 
     public void FadeIn(float duration, Action action = null)
@@ -43,6 +54,9 @@ public class UIManager : Singleton<UIManager>
 
     public void SetEntityText(int entity)
     {
-        entityText.text = $"Remain Entity : {entity}";
+        if (entity < 0)
+            return;
+
+        entityText.text = $"Remain Entity : {Mathf.Clamp(entity, 0, Define.entityMax)}";
     }
 }
